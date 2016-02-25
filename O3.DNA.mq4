@@ -1,5 +1,5 @@
 #property copyright "O3 Corp."
-#property version   "1.07"
+#property version   "1.09"
 #property strict
 
 double LastDayHigh, 
