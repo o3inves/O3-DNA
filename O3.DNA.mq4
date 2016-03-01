@@ -25,6 +25,7 @@ double LastDayHigh,
  extern double MaxLots = 100; //Broker Max Lat
  extern int DayTime = 0;
  extern int Debug = 0;
+ extern double InitialLot = 0;
  
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -33,7 +34,15 @@ int OnInit()
   {
 //---
    total = OrdersTotal();
-   LotsStartUp();
+   
+   if(InitialLot>0)
+     {
+         lotsi = InitialLot;
+     }
+   else
+     {
+         LotsStartUp();      
+     }
    
    BuyCanTrade =  1;  
    SellCanTrade = 1;  
@@ -232,7 +241,7 @@ void OrderSellClose(){
 //+------------------------------------------------------------------+
 void AccManager(){
    
-   lotsp=NormalizeDouble((AccountBalance()*risk/10000),2);
+   lotsp = NormalizeDouble(((AccountBalance()*risk/100)/20),2);
    if (lotsp<0.01) lotsp=0.01;   
    if (lotsp>MaxLots) lotsp=MaxLots;   
    
@@ -257,8 +266,14 @@ void AccManager(){
 
 void LotsStartUp(){
 
-         lotsi=NormalizeDouble((AccountBalance()*risk/10000),2);
-         if (lotsi<0.01) lotsi=0.01;   
-         if (lotsi>MaxLots) lotsi=MaxLots;   
+         lotsi = NormalizeDouble(((AccountBalance()*risk/100)/20),2);
+         if (lotsi>MaxLots)
+           {
+               lotsi = MaxLots;
+           }  
+         else if (lotsi<0.01)
+           {
+               lotsi=0.01;   
+           } 
 
 }
