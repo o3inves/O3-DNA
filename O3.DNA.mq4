@@ -25,6 +25,7 @@ double LastDayHigh,
  extern double MaxLots = 100; //Broker Max Lat
  extern int DayTime = 0;
  extern int Debug = 0;
+ extern double InitialLot = 0;
  
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -33,7 +34,15 @@ int OnInit()
   {
 //---
    total = OrdersTotal();
-   LotsStartUp();
+   
+   if(InitialLot>0)
+     {
+         lotsi = InitialLot;
+     }
+   else
+     {
+         LotsStartUp();      
+     }
    
    BuyCanTrade =  1;  
    SellCanTrade = 1;  
