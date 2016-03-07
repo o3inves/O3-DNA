@@ -136,6 +136,8 @@ void OrderBuy(){
          LotsToClose = 0.01; //Prevent lots lower than the min lot allowed; 
      }
    
+   Print("Spread: "+MarketInfo(Symbol(),MODE_SPREAD));
+   
    switch(DoubleBrake)
      {
       case  0:
@@ -195,6 +197,8 @@ void OrderSell(){
          LotsToClose = 0.01; //Prevent lots lower than the min lot allowed; 
      }
   
+   Print("Spread: "+MarketInfo(Symbol(),MODE_SPREAD));
+   
    switch(DoubleBrake)
      {
       case  0:
